@@ -315,9 +315,18 @@ public class ComponentFactory
         return comboBox;
     }
 
-    public static ValidatedTextField geTextField(boolean editable, String dbName, int max)
+    public static ValidatedTextField getTextField(boolean editable, String dbName, int max)
     {
         LengthTextField textField = new LengthTextField(0, max, 17);
+        textField.setEditable(editable);
+        textField.setName(dbName);
+        textField.setShowFeedback(true);
+        return textField;
+    }
+
+    public static ValidatedTextField getTextField(boolean editable, String dbName, int max,int col)
+    {
+        LengthTextField textField = new LengthTextField(0, max, col);
         textField.setEditable(editable);
         textField.setName(dbName);
         textField.setShowFeedback(true);
@@ -428,6 +437,40 @@ public class ComponentFactory
         VisiCheckbox checkBox = new VisiCheckbox(PolarisUI.getMessage("CF_INACTIVE"));
         checkBox.setName(Configuration.inactiveIndicatorDBName);
         return checkBox;
+    }
+
+
+    public static void resetComboBoxModel(JPanel panel)
+    {
+
+
+        Component[] pc = panel.getComponents();
+
+        for (int i = 0; i < pc.length; i++)
+        {
+
+            if (pc[i] instanceof VisiComboBox)
+            {
+
+                //if this is the activeinactive combobox, dont reset.
+                if(!((VisiComboBox) pc[i]).getName().equals(Configuration.inactiveIndicatorDBName))
+                {
+                    updateCombo((SortedIdNameComboBox) pc[i], "");
+                }
+
+            }
+
+            // Check if cp is a JPanel
+            if (pc[i] instanceof JPanel && !(pc[i] instanceof NrGDate))
+            {
+                // Populate the children
+                resetComboBoxModel((JPanel) pc[i]);
+            }
+
+
+        }
+
+
     }
 
     public static void updateCombo(SortedIdNameComboBox comboBox, String where)
@@ -913,5 +956,68 @@ public class ComponentFactory
 
         }
     }
+
+    public static void setDefaultValues(JPanel panel)
+    {
+
+
+        Component[] pc = panel.getComponents();
+
+        for (int i = 0; i < pc.length; i++)
+        {
+
+            if (pc[i] instanceof VisiCheckbox)
+            {
+                ((VisiCheckbox) pc[i]).setSelected(false);
+            }
+            if (pc[i] instanceof VisiComboBox)
+            {
+
+                //if it has a special item
+                //display the special item (All, NOne)
+                if (((VisiComboBox) pc[i]).hasSpecialItems())
+                {
+                    ((VisiComboBox) pc[i]).selectFirstSpecialItem();
+                } else
+                {
+                    if(((VisiComboBox) pc[i]).getName().equals(Configuration.inactiveIndicatorDBName))
+                        ((VisiComboBox) pc[i]).setSelectedItem(0);
+                    else
+                        ((VisiComboBox) pc[i]).clearSelection();
+                }
+
+            }
+            if (pc[i] instanceof NrGDate)
+            {
+                ((NrGDate) pc[i]).setValue("");
+            }
+
+            if (pc[i] instanceof JTextField)
+            {
+                if (pc[i] instanceof BigDecimalTextField)
+                {
+                    ((BigDecimalTextField) pc[i]).setRealValue(0, false);
+                }
+                else
+                {
+                    ((JTextField) pc[i]).setText("");
+                }
+            }
+
+
+
+            // Check if cp is a JPanel
+            if (pc[i] instanceof JPanel && !(pc[i] instanceof NrGDate))
+            {
+                // Populate the children
+                setDefaultValues((JPanel) pc[i]);
+            }
+
+
+        }
+
+
+    }
+
 }
 

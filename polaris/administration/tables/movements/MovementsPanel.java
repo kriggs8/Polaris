@@ -31,9 +31,10 @@ public class MovementsPanel extends MainPanel
     }
     protected void refineActionList()
     {
-        // Moving records up and down in the main grid is not applicable to Batch Routes configuration.
+        // Moving records up and down in the main grid is not applicable to Movements configuration.
         actionContainers.setAction(moveDownAction, false);
         actionContainers.setAction(moveUpAction, false);
+        actionContainers.setAction(cutAction, false);
     }
 
 }
