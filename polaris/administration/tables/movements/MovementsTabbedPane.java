@@ -25,12 +25,11 @@ public class MovementsTabbedPane extends GenericTabbedPane
 
         //---BEGIN Module Specific Code
         // This section will be used to add the tabs to the Tabbed Pane.
-        // Filter
-        //tab0
+        // tab#0 Filter
         movementsFilterPanel = new MovementsFilterPanel(mainPanel);
         addTab(PolarisUI.getMessage("CF_FILTER"), tabIcon, movementsFilterPanel,
                 PolarisUI.getMessage("CF_FILTER_PANEL", PolarisUI.getMessage("MOVEMENT")));
-        // END tab0
+        // END tab#0
         //---END Module Specific Code
 
         setTabPlacement(JTabbedPane.TOP);

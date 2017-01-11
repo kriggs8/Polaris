@@ -333,29 +333,41 @@ public class ComponentFactory
         return textField;
     }
 
+    /*  Waleed ElSaid on 01/10/2017
+        Updated the method to call the generic getComboBox below
+     */
     public static VisiComboBox getSystemGroupComboBox(String where, String dbName, String specialValue)
     {
         return getComboBox(Configuration.systemGroupTableName, where, dbName, specialValue);
     }
 
+    /*  Waleed ElSaid on 01/10/2017
+        Updated the method to call the generic getComboBox below
+     */
     public static VisiComboBox getLineSpaceComboBox(String where, String dbName, String specialValue)
     {
         return getComboBox(Configuration.lineSpaceTableName, where, dbName, specialValue);
     }
 
+    /*  Waleed ElSaid on 01/10/2017
+        Updated the method to call the generic getComboBox below
+     */
     public static VisiComboBox getGradeSpecComboBox(String where, String dbName, String specialValue)
     {
         return getComboBox(Configuration.gradeSpecTableName, where, dbName, specialValue);
     }
 
+    /*  Waleed ElSaid on 01/10/2017
+        Updated the method to call the generic getComboBox below
+     */
     public static VisiComboBox getMovementComboBox(String where, String dbName, String specialValue)
     {
         return getComboBox(Configuration.movementTableName, where, dbName, specialValue);
     }
 
     /*  Waleed ElSaid on 01/10/2017
-        Added this method for all the new combo boxes, you just have to pass the DB table name and the usuall where clause
-        from the Configuration class, db name for the movement module are kept in the MovementsConstants class,
+        Added this method for all the new combo boxes, you just have to pass the DB table name, and db name
+        from the Configuration class, as well as the where clause which, in case of the movement module is kept in the MovementsConstants class,
     */
     public static VisiComboBox getComboBox(String tableName, String where, String dbName, String specialValue)
     {

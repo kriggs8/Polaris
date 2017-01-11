@@ -1,6 +1,7 @@
 package polaris.administration.tables.movements;
 
 /** A class containing some constants used in the Movements Module
+ * These constants are usually used to build combo boxes connecting to the DB
  * @Author: Waleed Elsaid on 1/10/2017.
  */
 public class MovementsContants {

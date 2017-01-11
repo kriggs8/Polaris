@@ -75,9 +75,9 @@ public class MovementsFilterPanel extends GenericFilterPanel {
         this.addToThisPanelAutoLayout(2, "REC_CON_CARRIER", recConCarrierCombo);
         this.addToThisPanelAutoLayout(2, "DEL_LOCATION", delLocationCombo);
         this.addToThisPanelAutoLayout(2, "DEL_CON_CARRIER", delConCarrierCombo);
-        this.addToThisPanelAutoLayout(2, "", null); // just to keep the activeInactive combo on the right like the FRDD
+        this.addToThisPanelAutoLayout(2, "", null); // just to keep the activeInactive combo on the right bottom side as it appears in the FRDD
         //---END Module Specific Code
-        //adds the inactive indicator flag to this panel.
+        //add the inactive indicator flag to this panel.
         addActiveInactiveComboBox(2);
         ComponentFactory.addListeners(this);
     }
