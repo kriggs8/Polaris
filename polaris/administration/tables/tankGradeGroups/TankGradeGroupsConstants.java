@@ -24,7 +24,7 @@ class TankGradeGroupsConstants
 
     public static final String where1 = "(\n" +
                                         "SELECT \n" +
-                                        "UNIQUE BR.SCHED_SYSTEM_ID,BR.SYSTEM_ID,TTG.TANK_GRADE_GROUP_ID,TGG.GRADE_ID,  C.INACTIVE_INDICATOR_FLAG\n" +
+                                        "UNIQUE BR.SCHED_SYSTEM_ID,BR.SYSTEM_ID,TTG.TANK_GRADE_GROUP_ID,TGG.GRADE_ID AS GRADE_ID,C.INACTIVE_INDICATOR_FLAG\n" +
                                         "FROM \n" +
                                         "POLARIS.BATCH_ROUTE_CONF BR,\n" +
                                         "POLARIS.BATCH_ROUTE_TANK_XREF BRT,\n" +
