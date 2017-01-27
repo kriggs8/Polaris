@@ -7,12 +7,15 @@ import javax.swing.*;
 
 /**
  * Tabbed Panel Class for MOVEMENT_CONF
- * @Author: Waleed Elsaid on 1/9/2017.
+ * Creation Date: 1/9/2017
+ * @Author: TCI- Waleed Elsaid
+ * Update Date: 1/19/2017 - Added the maintenance tab to the panel
  */
 
 public class MovementsTabbedPane extends GenericTabbedPane
 {
     private MovementsFilterPanel movementsFilterPanel;
+    private MovementsMaintenancePanel movementsMaintenancePanel;
     public MovementsTabbedPane() throws Exception
     {
         super();
@@ -30,6 +33,11 @@ public class MovementsTabbedPane extends GenericTabbedPane
         addTab(PolarisUI.getMessage("CF_FILTER"), tabIcon, movementsFilterPanel,
                 PolarisUI.getMessage("CF_FILTER_PANEL", PolarisUI.getMessage("MOVEMENT")));
         // END tab#0
+        // tab#1 Maintenance
+        movementsMaintenancePanel = new MovementsMaintenancePanel(mainPanel);
+        addTab(PolarisUI.getMessage("CF_MAINTENANCE"), tabIcon, movementsMaintenancePanel,
+                PolarisUI.getMessage("CF_MAINTENANCE_PANEL", PolarisUI.getMessage("MOVEMENT")));
+        // END tab#1
         //---END Module Specific Code
 
         setTabPlacement(JTabbedPane.TOP);

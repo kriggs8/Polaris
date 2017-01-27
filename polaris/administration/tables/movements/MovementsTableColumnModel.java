@@ -4,7 +4,9 @@ import polaris.administration.tables.GenericTableColumnModel;
 
 /**
  * Table Column Model Class for MOVEMENT_CONF
- * @Author: Waleed Elsaid on 1/9/2017.
+ * Tabbed Panel Class for MOVEMENT_CONF
+ * Creation Date: 1/9/2017
+ * @Author: TCI- Waleed Elsaid
  */
 public class MovementsTableColumnModel extends GenericTableColumnModel
 {

@@ -12,8 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- *  Filter Panel Class for MOVEMENT_CONF. This panel will be displayed in the Tabbed Panel class.
- * @Author: Waleed Elsaid on 1/9/2017.
+ * Filter Panel Class for MOVEMENT_CONF. This panel will be displayed in the Tabbed Panel class.
+ * Creation Date: 1/9/2017
+ * @Author: TCI- Waleed Elsaid
  */
 
 public class MovementsFilterPanel extends GenericFilterPanel {
@@ -33,36 +34,36 @@ public class MovementsFilterPanel extends GenericFilterPanel {
         this.mainPanel = mainPanel;
         this.mainTable = mainPanel.mainTable;
         // Movements Filter Tab Components are constructed here via the ComponentFactory Util class
-        systemGroupCombo = ComponentFactory.getComboBox(Configuration.systemGroupTableName,
-                                                        MovementsContants.SYSTEM_GROUP_WHERE_CLAUSE,
+        systemGroupCombo = ComponentFactory.getComboBox(true, Configuration.systemGroupTableName,
+                                                        MovementsConstants.systemGroupWhereClause,
                                                         Configuration.systemGroupDBName,
                                                         SpecialItems.ALL);
-        lineSpaceCombo = ComponentFactory.getComboBox(Configuration.lineSpaceTableName,
-                                                      MovementsContants.LINE_SPACE_WHERE_CLAUSE,
+        lineSpaceCombo = ComponentFactory.getComboBox(true, Configuration.lineSpaceTableName,
+                                                      MovementsConstants.lineSpaceWhereClause,
                                                       Configuration.linespaceDBName,
                                                       SpecialItems.ALL);
-        gradeSpecCombo = ComponentFactory.getComboBox(Configuration.gradeSpecTableName,
-                                                      MovementsContants.GRADE_SPEC_WHERE_CLAUSE,
+        gradeSpecCombo = ComponentFactory.getComboBox(true, Configuration.gradeSpecTableName,
+                                                      MovementsConstants.gradeSpecWhereClause,
                                                       Configuration.gradeSpecDBName,
                                                       SpecialItems.ALL);
-        movementCombo = ComponentFactory.getComboBox(Configuration.movementTableName,
-                                                     MovementsContants.MOVEMENT_WHERE_CLAUSE,
-                                                     Configuration.movementDBName,
+        movementCombo = ComponentFactory.getComboBox(true, Configuration.movementTableName,
+                                                     MovementsConstants.movementWhereClause,
+                                                     Configuration.idDBName,
                                                      SpecialItems.ALL);
-        recLocationCombo = ComponentFactory.getComboBox(Configuration.locationTableName,
-                                                        MovementsContants.REC_LOCATION_WHERE_CLAUSE,
+        recLocationCombo = ComponentFactory.getComboBox(true, Configuration.locationTableName,
+                                                        MovementsConstants.recLocationWhereClause,
                                                         Configuration.recLocationDBName,
                                                         SpecialItems.ALL);
-        recConCarrierCombo = ComponentFactory.getComboBox(Configuration.conCarrierTableName,
-                                                          MovementsContants.REC_CON_CARRIER_WHERE_CLAUSE,
+        recConCarrierCombo = ComponentFactory.getComboBox(true, Configuration.conCarrierTableName,
+                                                          MovementsConstants.recConCarrierWhereClause,
                                                           Configuration.recConCarrierDBName,
                                                           SpecialItems.ALL);
-        delLocationCombo = ComponentFactory.getComboBox(Configuration.locationTableName,
-                                                        MovementsContants.DEL_LOCATION_WHERE_CLAUSE,
+        delLocationCombo = ComponentFactory.getComboBox(true, Configuration.locationTableName,
+                                                        MovementsConstants.delLocationWhereClause,
                                                         Configuration.delLocationDBName,
                                                         SpecialItems.ALL);
-        delConCarrierCombo = ComponentFactory.getComboBox(Configuration.conCarrierTableName,
-                                                          MovementsContants.DEL_CON_CARRIER_WHERE_CLAUSE,
+        delConCarrierCombo = ComponentFactory.getComboBox(true, Configuration.conCarrierTableName,
+                                                          MovementsConstants.delConCarrierWhereClause,
                                                           Configuration.delConCarrierDBName,
                                                           SpecialItems.ALL);
         // Now let's put them in the tabbed pane
@@ -82,24 +83,11 @@ public class MovementsFilterPanel extends GenericFilterPanel {
         ComponentFactory.addListeners(this);
     }
 
-    @Override
-    public void setMenu(boolean onFlag) {
-    }
-
-    /**
-     * set Help Topic Id
-     */
-    @Override
-    public void setHelp() {
-        this.mainPanel.setContextHelpTopicId("MovementsConfigurationModule_FilterTab");
-    }
-
-
     /**
      * method is triggered when components (comboboxes) in the filter panel has an action being done on it
      * Actions on comboboxes will update dependent comboboxes model factory.
      *
-     * @param e
+     * @param e the event
      */
     public void actionPerformed(ActionEvent e) {
         //if the component does not have focus
@@ -120,7 +108,7 @@ public class MovementsFilterPanel extends GenericFilterPanel {
     /**
      * Updates the combo boxes model factory
      *
-     * @param e
+     * @param e the event
      */
     public void updateCombo(ActionEvent e) {
 
@@ -137,55 +125,55 @@ public class MovementsFilterPanel extends GenericFilterPanel {
         if (e.getSource() instanceof JComboBox) {
             /* In the following logic statements check if actions are on the corresponding ComboBox then
                update the dependent compboBoxes, or if the focus is not on the ComboBox and the action is not on it
-               then, update  systemGroup Combobox, or finally if the focus is on ComboBox and the user selects All,
+               then, update the corresponding Combobox (system group in the first case), or finally if the focus is on ComboBox and the user selects All,
                which causes the ComboBox to reload the model factory.
             */
             if (action != systemGroupCombo.getName() && !systemGroupCombo.hasFocus() ||
                     systemGroupCombo.hasFocus() && systemGroupCombo.getSelectedItem().equals(SpecialItems.ALL)) {
-                ComponentFactory.updateCombo(systemGroupCombo, MovementsContants.SYSTEM_GROUP_WHERE_CLAUSE + where + ")");
+                ComponentFactory.updateCombo(systemGroupCombo, MovementsConstants.systemGroupWhereClause + where + ")");
             }
 
             if (action != lineSpaceCombo.getName() && !lineSpaceCombo.hasFocus() ||
                     lineSpaceCombo.hasFocus() && lineSpaceCombo.getSelectedItem() != null &&
                             lineSpaceCombo.getSelectedItem().equals(SpecialItems.ALL)) {
-                ComponentFactory.updateCombo(lineSpaceCombo, MovementsContants.LINE_SPACE_WHERE_CLAUSE + where + ")");
+                ComponentFactory.updateCombo(lineSpaceCombo, MovementsConstants.lineSpaceWhereClause + where + ")");
 
             }
 
             if (action != gradeSpecCombo.getName() && !gradeSpecCombo.hasFocus() ||
                     gradeSpecCombo.hasFocus() && gradeSpecCombo.getSelectedItem() != null &&
                             gradeSpecCombo.getSelectedItem().equals(SpecialItems.ALL)) {
-                ComponentFactory.updateCombo(gradeSpecCombo, MovementsContants.GRADE_SPEC_WHERE_CLAUSE + where + ")");
+                ComponentFactory.updateCombo(gradeSpecCombo, MovementsConstants.gradeSpecWhereClause + where + ")");
             }
 
             if (action != movementCombo.getName() && !movementCombo.hasFocus() ||
                     movementCombo.hasFocus() && movementCombo.getSelectedItem() != null &&
                             movementCombo.getSelectedItem().equals(SpecialItems.ALL)) {
-                ComponentFactory.updateCombo(movementCombo, MovementsContants.MOVEMENT_WHERE_CLAUSE + where + ")");
+                ComponentFactory.updateCombo(movementCombo, MovementsConstants.movementWhereClause + where + ")");
             }
 
             if (action != recLocationCombo.getName() && !recLocationCombo.hasFocus() ||
                     recLocationCombo.hasFocus() && recLocationCombo.getSelectedItem() != null &&
                             recLocationCombo.getSelectedItem().equals(SpecialItems.ALL)) {
-                ComponentFactory.updateCombo(recLocationCombo, MovementsContants.REC_LOCATION_WHERE_CLAUSE + where + ")");
+                ComponentFactory.updateCombo(recLocationCombo, MovementsConstants.recLocationWhereClause + where + ")");
             }
 
             if (action != recConCarrierCombo.getName() && !recConCarrierCombo.hasFocus() ||
                     recConCarrierCombo.hasFocus() && recConCarrierCombo.getSelectedItem() != null &&
                             recConCarrierCombo.getSelectedItem().equals(SpecialItems.ALL)) {
-                ComponentFactory.updateCombo(recConCarrierCombo, MovementsContants.REC_CON_CARRIER_WHERE_CLAUSE + where + ")");
+                ComponentFactory.updateCombo(recConCarrierCombo, MovementsConstants.recConCarrierWhereClause + where + ")");
             }
 
             if (action != delLocationCombo.getName() && !delLocationCombo.hasFocus() ||
                     delLocationCombo.hasFocus() && delLocationCombo.getSelectedItem() != null &&
                             delLocationCombo.getSelectedItem().equals(SpecialItems.ALL)) {
-                ComponentFactory.updateCombo(delLocationCombo, MovementsContants.DEL_LOCATION_WHERE_CLAUSE + where + ")");
+                ComponentFactory.updateCombo(delLocationCombo, MovementsConstants.delLocationWhereClause + where + ")");
             }
 
             if (action != delConCarrierCombo.getName() && !delConCarrierCombo.hasFocus() ||
                     delConCarrierCombo.hasFocus() && delConCarrierCombo.getSelectedItem() != null &&
                             delConCarrierCombo.getSelectedItem().equals(SpecialItems.ALL)) {
-                ComponentFactory.updateCombo(delConCarrierCombo, MovementsContants.DEL_CON_CARRIER_WHERE_CLAUSE + where + ")");
+                ComponentFactory.updateCombo(delConCarrierCombo, MovementsConstants.delConCarrierWhereClause + where + ")");
             }
 
 

@@ -2,7 +2,8 @@ package polaris.administration.tables;
 
 /**
  * Created by CE7 on 4/29/2016.
- * Updated by Waleed ElSaid on 01/10/2017 to add some DB, and table names for the Movements Filter Tab comboBoxes
+ * Update Date: 1/10/2017 by Waleed ElSaid - added some DB, and table names for the Movements Filter Tab comboBoxes
+ * Update Date: 1/18/2017 by Waleed ElSaid - added some DB, and table names for the Movements Maintenance  Tab comboBoxes
  */
 public class Configuration
 {
@@ -41,13 +42,15 @@ public class Configuration
     public static String systemGroupDBName           = "(SYSTEM_GROUP_ID";
     public static String linespaceDBName             = "(LINESPACE_ID";
     public static String gradeSpecDBName             = "(GRADE_SPEC_ID";
-    public static String movementDBName              = "(ID";
     public static String defaultRecInvLocationDBName = "(DEFAULT_REC_INV_LOCATION_ID";
     public static String defaultDelInvLocationDBName = "(DEFAULT_DEL_INV_LOCATION_ID";
     public static String reportableVolDBName         = "(REPORTABLE_VOLUME_SYSTEM_ID";
     public static String revenueAllocMethodDBName    = "(REVENUE_ALLOC_METHOD_ID";
     public static String bookInvLocationDBName       = "(BOOK_INV_LOCATION_ID";
     public static String genericNameDBName           = "(GENERIC_NAME";
+    public static String settledDBName              = "(SETTLED_FLAG";
+    public static String allocCreditDBName           = "(ALLOC_CREDIT_FLAG";
+    public static String crossoverDBName           = "(CROSSOVER_FLAG";
 
     public static String systemTableName         = "SYSTEM_CONF";
     public static String scheduleSystemTableName = "SCHED_SYSTEM_CONF";

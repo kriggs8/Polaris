@@ -5,7 +5,8 @@ import polaris.administration.tables.MainPanel;
 
 /**
  * Main Panel Class for MOVEMENT_CONF
- * @Author: Waleed Elsaid on 1/9/2017.
+ * Creation Date: 1/9/2017
+ * @Author: TCI- Waleed Elsaid
  */
 public class MovementsPanel extends MainPanel
 {
@@ -36,5 +37,16 @@ public class MovementsPanel extends MainPanel
         actionContainers.setAction(moveUpAction, false);
         actionContainers.setAction(cutAction, false);
     }
+
+    public static GenericTable getMainTable()
+    {
+        return mainTable;
+    }
+
+    public void setTable(GenericTable table)
+    {
+        this.mainTable = table;
+    }
+
 
 }
