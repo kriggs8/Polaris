@@ -2,7 +2,10 @@ package polaris.administration.tables.companies;
 
 import polaris.administration.tables.*;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 
 /**
  * Creates the Maintenance Panel for the configuration screen.
@@ -40,6 +43,7 @@ public class CompaniesMaintenancePanel extends GenericTabPanel implements Action
         //have one tableModel in a panel.
         ComponentFactory.setTableModelClassName(this, tableModel.getClass().getName());
     }
+
     /**
      * This method is triggered when the components in the maintenance panel
      * have an action being done on it

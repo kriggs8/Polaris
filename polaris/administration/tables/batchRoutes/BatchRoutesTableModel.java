@@ -12,7 +12,6 @@ import javax.swing.event.TableModelListener;
 
 /**
  *  Prototype Code - Table Model Class for BATCH_ROUTES_CONF
- *  TODO: MORE COMMENTS
  *  @Author - Jean Wurster
  */
 public class BatchRoutesTableModel extends GenericTableModel
@@ -21,7 +20,7 @@ public class BatchRoutesTableModel extends GenericTableModel
 
 	public BatchRoutesTableModel(ColumnRecordSet crs)
 	{
-		super(crs, PolarisUI.getMessage("BATCH_ROUTE"));
+		super(crs, PolarisUI.getMessage("CF_MAINTENANCE_PANEL", PolarisUI.getMessage("BATCH_ROUTE")));
 	}
 
 	public int getColumnCount()
@@ -56,7 +55,6 @@ public class BatchRoutesTableModel extends GenericTableModel
 
 	public void addTableModelListener(TableModelListener l)
 	{
-		//todo: not sure if this is needed
 		super.addTableModelListener(l);
 	}
 

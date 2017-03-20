@@ -11,7 +11,6 @@ import javax.swing.*;
  * Prototype Code - Tabbed Panel Class for BATCH_ROUTES_CONF. It instantiates the Filter, Maintenance, Segment
  * Meters, Manifolds, Tanks and Agg Movements Tabs.
  * <p>
- * TODO: MORE COMMENTS
  *
  * @Author: Jean Wurster
  */

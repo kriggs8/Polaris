@@ -1,8 +1,6 @@
 package polaris.administration.tables.tankGradeGroups;
 
 import polaris.administration.tables.GenericTabbedPane;
-import polaris.administration.tables.GenericTableModel;
-import polaris.administration.tables.MainPanel;
 import polaris.frame.PolarisUI;
 
 import javax.swing.*;
@@ -11,7 +9,9 @@ import javax.swing.*;
  * Tabbed Panel Class for TANK_GRADE_GROUP_CONF.
  * It instantiates the Filter, Maintenance and Grade Tabs.
  *
- * @Author: Krista Riggs(TCI) @ 1/10/17
+ * @Author: TCI - Krista Riggs
+ * Created  1/10/17
+ * Updated  2/6/17 - TCI Krista Riggs - Updated comments
  */
 public class TankGradeGroupsTabbedPane extends GenericTabbedPane
 {
@@ -20,6 +20,10 @@ public class TankGradeGroupsTabbedPane extends GenericTabbedPane
     private TankGradeGroupsMaintenancePanel tankGradeGroupsMaintenancePanel;
     private TankGradeGroupsGradesPanel      tankGradeGroupsGradesPanel;
 
+    /**
+     * Main method for Tank Grade Groups Tabbed Pane
+     * @throws Exception
+     */
     public TankGradeGroupsTabbedPane() throws Exception
     {
         super();

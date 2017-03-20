@@ -13,8 +13,7 @@ import java.awt.event.ActionEvent;
 
 /**
  * Filter Panel Class for MOVEMENT_CONF. This panel will be displayed in the Tabbed Panel class.
- * Creation Date: 1/9/2017
- * @Author: TCI- Waleed Elsaid
+ * Created by  TCI-Waleed Elsaid on  1/9/2017
  */
 
 public class MovementsFilterPanel extends GenericFilterPanel {
@@ -84,6 +83,7 @@ public class MovementsFilterPanel extends GenericFilterPanel {
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/9/2017
      * method is triggered when components (comboboxes) in the filter panel has an action being done on it
      * Actions on comboboxes will update dependent comboboxes model factory.
      *
@@ -106,6 +106,7 @@ public class MovementsFilterPanel extends GenericFilterPanel {
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/9/2017
      * Updates the combo boxes model factory
      *
      * @param e the event

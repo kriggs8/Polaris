@@ -97,7 +97,7 @@ public class BatchRoutesManifoldsPanel extends GenericTabPanel
         tabTable = new GenericTable(new TableSorter(brManifoldsTableModel));
         tabTable.setMainPanel(mainPanel);
         tabTable.setColumnModel(brManifoldsTableColumnModel);
-        tabTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         tabTable.setFillsViewportHeight(true);
         tabTable.setIntercellSpacing(new Dimension(0, 0));
 

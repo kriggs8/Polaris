@@ -93,7 +93,7 @@ public class BatchRoutesAggMovementsPanel extends GenericTabPanel
         tabTable = new GenericTable(new TableSorter(brAggMovementsTableModel));
         tabTable.setMainPanel(mainPanel);
         tabTable.setColumnModel(brAggMovementsTableColumnModel);
-        tabTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         tabTable.setFillsViewportHeight(true);
         tabTable.setIntercellSpacing(new Dimension(0, 0));
         //makes the Panel scrollable.
@@ -200,8 +200,9 @@ public class BatchRoutesAggMovementsPanel extends GenericTabPanel
 
                     if (value != null)
                     {
+                        // Joe Hunsaker - 1/23/2017 - Fixed SPR 131 by checking _ID on end of string instead of anywhere in string
                         //if not null and it is a foreign key set the long value
-                        if (column.foreignKey || (column.dataType.equals("NUMBER") && column.columnName.contains("_ID")))
+                        if (column.foreignKey || (column.dataType.equals("NUMBER") && column.columnName.endsWith("_ID")))
                         {
                             //used specifically for combo boxes
                             //it requires a the long value to be populated.

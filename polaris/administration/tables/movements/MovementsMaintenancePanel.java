@@ -29,8 +29,7 @@ import java.text.DecimalFormat;
 
 /**
  * Maintenance Panel Class for MOVEMENT_CONF. This panel will be displayed in the Tabbed Panel class.
- * Creation Date: 1/18/2017
- * @Author: TCI- Waleed Elsaid
+ * Created by  TCI-Waleed Elsaid on  1/18/2017
  * Update Date: 1/26 updated the getDBNameFactoryWhereClause() to use the result set instead of the combobox selected values
  * Update Date: 1/27 updated the updateCombo() to use the comboBos selected items for the System Group and Line Space
  */
@@ -75,6 +74,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
     private DBIdNameFactory     gradeSpecNameModel;
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * Instantiates the Maintenance Panel.
      *
      * @param mainPanel
@@ -120,8 +120,13 @@ public class MovementsMaintenancePanel extends GenericTabPanel
         return null;
     }
 
+
+    /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
+     * This method is being called from the super class
+     *
+     */
     @Override
-    // This method is being called fromthe super class
     public void createPanel()
     {
         //creates all the compononents for the panel.
@@ -161,11 +166,13 @@ public class MovementsMaintenancePanel extends GenericTabPanel
                                                         "",
                                                         Configuration.gradeSpecDBName,
                                                         null);
+
         reportVolSystemCombo = ComponentFactory.getComboBox(true,
                                                         Configuration.systemTableName,
                                                         "",
                                                         Configuration.reportableVolDBName,
                                                         null);
+
         revAllocMethodCombo = ComponentFactory.getComboBox(true,
                                                         Configuration.revAllocMethodTableName,
                                                         "",
@@ -194,11 +201,11 @@ public class MovementsMaintenancePanel extends GenericTabPanel
 
         //-creates Checkboxes
         settledFlag = new VisiCheckbox(PolarisUI.getMessage("SETTLED"));
-        settledFlag.setName(Configuration.settledDBName);
+        settledFlag.setName(MovementsConstants.settledDBName);
         allocCreditFlag = new VisiCheckbox(PolarisUI.getMessage("ALLOC_CREDIT"));
-        allocCreditFlag.setName(Configuration.allocCreditDBName);
+        allocCreditFlag.setName(MovementsConstants.allocCreditDBName);
         crossOverFlag = new VisiCheckbox(PolarisUI.getMessage("CROSSOVER"));
-        crossOverFlag.setName(Configuration.crossoverDBName);
+        crossOverFlag.setName(MovementsConstants.crossoverDBName);
 
         // create model factories for location and for connecting carriers
         // used to populated name and description field.
@@ -229,11 +236,18 @@ public class MovementsMaintenancePanel extends GenericTabPanel
         this.addToThisPanel(4, 2, 3, "ALIAS", alias);
 
         // row 3
+
         this.addToThisPanel(0, 3, 3, "DESCRIPTION", description);
 
         // row 4
-        this.addToThisPanel(0, 4, 2, "CF_REV_ACCOUNTING", null);
-        this.addToThisPanel(4, 4, 2, "CF_DAILY_NOMINATIONS", null);
+        JLabel revAccLabel = new JLabel(PolarisUI.getMessage("CF_REV_ACCOUNTING"));
+        Font font = revAccLabel.getFont();
+        Font boldFont = new Font(font.getFontName(), Font.BOLD, font.getSize());
+        revAccLabel.setFont(boldFont);
+        this.addToThisPanel(0, 4, 2, revAccLabel);
+        JLabel dailyNomLabel = new JLabel(PolarisUI.getMessage("CF_DAILY_NOMINATIONS"));
+        dailyNomLabel.setFont(boldFont);
+        this.addToThisPanel(4, 4, 2, dailyNomLabel);
 
         // row 5
         // First construct the two small panels and then embed them into the parnent panel
@@ -252,15 +266,15 @@ public class MovementsMaintenancePanel extends GenericTabPanel
         VisiGridBagPanel dailyNomPanel = new VisiGridBagPanel();
         dailyNomPanel.setBorder(simpleBorder);
         dailyNomPanel.addToThisPanel(0, 0, 3, "GENERIC_NAME", genericName);
-        dailyNomPanel.addToThisPanel(0, 1, 1, "", allocCreditFlag);
-        dailyNomPanel.addToThisPanel(2, 1, 1, "", crossOverFlag);
+        dailyNomPanel.addToThisPanel(0, 1, 1,  allocCreditFlag);
+        dailyNomPanel.addToThisPanel(2, 1, 1,  crossOverFlag);
 
         // Now add them and voila
         this.addToThisPanel(0, 5, 4, revAccPanel);
         this.addToThisPanel(4, 5, 4, dailyNomPanel);
 
         // row 6
-        this.addToThisPanel(1, 6, 1, "UPDATE_USER", updateUser);
+        this.addToThisPanel(2, 6, 1, "UPDATE_USER", updateUser);
         this.addToThisPanel(4, 6, 1, "USER_UPDATE_DATE", userUpdateDate);
 
         // The objective of these calls below for the main panel and the two sub-panels is to allow the controls in
@@ -274,6 +288,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
 
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * This method returns the selected ID from the lookuptable that the given combo box is pointing to
      * @param comboBox
      * @return the ID or -1 if the combobox is empty
@@ -294,6 +309,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
 
     @Override
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * This method sets the validators to be called at the save action
      */
     protected void setValidators()
@@ -319,6 +335,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
                 column.setValidator(defaultValidator(column));
             }
 
+
             if (column.columnName.equals("REVENUE_ALLOC_METHOD_ID"))
             {
                 column.setValidator(revAllocMethodValidator(column));
@@ -327,6 +344,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * This method returns a validator for the Rev Alloc Method combo box
      * to check for the user selection and gives warning message to populate the right tab according to the selection
      * or an error if the user does not select anything
@@ -335,8 +353,6 @@ public class MovementsMaintenancePanel extends GenericTabPanel
      */
     private ColumnValidator revAllocMethodValidator(Column column)
     {
-
-
         ColumnValidator validator = new ColumnValidator(column)
         {
             String errorMsg;
@@ -357,7 +373,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
 
                     if (value == null || value.equals(new Long(0)))
                     {
-                        errorMsg = "CF_VALIDATION_NULL";
+                        errorMsg = PolarisUI.getMessage("CF_VALIDATION_NULL", "Rev Alloc Method");
                         return false;
                     }
                     if (value.equals(RevenueAllocMethodDesc.PERCENTAGE))
@@ -368,6 +384,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
                     {
                         errorMsg = PolarisUI.getMessage("CF_MV_REV_ALLOC_METHOD","Tariffs", "MILES/BARREL_MILES");
                     }
+                    this.setMode(ColumnValidator.MODAL_AND_FOCUS_AND_BYPASS);
                     return false;
                 }
             }
@@ -379,11 +396,12 @@ public class MovementsMaintenancePanel extends GenericTabPanel
 
         };
 
-        validator.setMode(ColumnValidator.MODAL_AND_FOCUS_AND_BYPASS);
+
         return validator;
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * This method is triggered when components (comboboxes) in the maintenance panel has an action being done on it
      * Actions on location comboboxes and con carrier comboboxes, will update the name and description fields
      * Actions on the System combobox will update the OS Area and vice versa.
@@ -441,13 +459,15 @@ public class MovementsMaintenancePanel extends GenericTabPanel
 
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * Method is called if a combo box value has been changed
      * Dependent combobox model is updated.
      *
      * @param component the combobox having the focus
      * @param action    the action name of the combobox
      */
-    private void updateCombo(VisiComboBox component, String action) {
+    private void updateCombo(VisiComboBox component, String action)
+    {
         String where = "";
         // first check for active views
         if (!resultRS.isReadOnly()) {
@@ -476,6 +496,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * Method is called only if the Rec. Location, Del. Location, Rec. Con. Carrier, Del. Con. Carrier, and Grade Spec.
      * comboboxes are changed.
      * This method, grabs the combo boxs selected items and
@@ -519,6 +540,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * Method creates a string of concatenated rec location, del location, rec con carrier and del con carrier
      * description values.
      * Loops through Panel's components and only process comboboxes for
@@ -594,7 +616,6 @@ public class MovementsMaintenancePanel extends GenericTabPanel
         catch (Exception e)
         {
             //if it cannot load the data from database display an error message.
-            //todo:check if the is being displayed in the logfile only and not a dialog error message
             //must make this consistent.
             System.out.println(e.getMessage());
         }
@@ -687,6 +708,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * This method is triggered when the following occurs:
      * validatedtextfield has lost focus and field value has changed.
      * TextField, any value has changed.  It does not wait for lost focus.
@@ -716,6 +738,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * This method is triggered if the checkboxes are checked.
      * if method is triggered, it sets the field to updated and the tableRow object
      * to updated.
@@ -741,6 +764,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * This method returns the ID from the result set for a given column name in the given row
      * @param columnName the name of the column in the DB
      * @param mainTableRow the selected row in the main table
@@ -755,6 +779,7 @@ public class MovementsMaintenancePanel extends GenericTabPanel
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/18/2017
      * Gets the where clause for the DBNameFactory.  Used to populate the combo boxes model factory.
      *
      * @param columnName   -  column name of the table field.

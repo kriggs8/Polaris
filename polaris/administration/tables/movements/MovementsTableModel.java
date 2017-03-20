@@ -8,8 +8,7 @@ import javax.swing.event.TableModelListener;
 
 /**
  * Table Model Class for MOVEMENT_CONF
- * Creation Date: 1/9/2017
- * @Author: TCI- Waleed Elsaid
+ * Created by  TCI-Waleed Elsaid on  1/9/2017
  */
 public class MovementsTableModel  extends GenericTableModel {
     public MovementsTableModel(ColumnRecordSet crs) {
@@ -36,6 +35,7 @@ public class MovementsTableModel  extends GenericTableModel {
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/9/2017
      * @param column, the column index
      * @return the string name of the column
      */
@@ -44,6 +44,7 @@ public class MovementsTableModel  extends GenericTableModel {
     }
 
     /**
+     * Created by  TCI-Waleed Elsaid on  1/9/2017
      * @param col the col index
      * @return the reflection API, class object implementing the input column at the given index
      */

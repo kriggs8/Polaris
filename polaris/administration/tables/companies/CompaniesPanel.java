@@ -4,7 +4,7 @@ import polaris.administration.tables.GenericTable;
 import polaris.administration.tables.MainPanel;
 
 /**
- *  Main Panel Class for COMPANY_CONF. It defines the
+ * Main Panel Class for COMPANY_CONF. It defines the
  * Configuration's database table. It also defines the Companies'
  * TableColumnModel, TableModel and Tabbed Panel. The the names of these classes
  * will be passed on to the MainTable class which creates the main panel

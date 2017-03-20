@@ -83,9 +83,12 @@ public class BatchRoutesSegmentsPanel extends GenericTabPanel
         tabTable = new GenericTable(new TableSorter(brSegmentsTableModel));
         tabTable.setMainPanel(mainPanel);
         tabTable.setColumnModel(brSegmentsColumnModel);
-        tabTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         tabTable.setFillsViewportHeight(true);
         tabTable.setIntercellSpacing(new Dimension(0, 0));
+
+        // JoeH - Per Jean Wurster Request, commenting out DragNDrop until there is a requirement for it
+        //tabTable.enableDragNDrop();
 
         JScrollPane tableScrollPanel = new JScrollPane(tabTable);
         tableScrollPanel.setPreferredSize(new Dimension(124, 124));
@@ -241,7 +244,8 @@ public class BatchRoutesSegmentsPanel extends GenericTabPanel
                         if (value != null)
                         {
                             //if not null and it is a foreign key set the long value
-                            if (column.foreignKey || (column.dataType.equals("NUMBER") && column.columnName.contains("_ID")))
+                            // Joe Hunsaker - 1/23/2017 - Fixed SPR 131 by checking _ID on end of string instead of anywhere in string
+                            if (column.foreignKey || (column.dataType.equals("NUMBER") && column.columnName.endsWith("_ID")))
                             {
                                 //used specifically for combo boxes
                                 //it requires a the long value to be populated.
@@ -589,7 +593,7 @@ public class BatchRoutesSegmentsPanel extends GenericTabPanel
 
         public BatchRoutesSegmentsTableModel(ColumnRecordSet crs, String[] names)
         {
-            super(crs, names, false, PolarisUI.getMessage("CF_SEGMENTS_PANEL", PolarisUI.getMessage("BATCH_ROUTE")));
+            super(crs, names, true, PolarisUI.getMessage("CF_SEGMENTS_PANEL", PolarisUI.getMessage("BATCH_ROUTE")));
 
 
         }

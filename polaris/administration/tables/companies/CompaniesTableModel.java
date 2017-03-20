@@ -2,10 +2,8 @@ package polaris.administration.tables.companies;
 
 import polaris.administration.tables.ColumnRecordSet;
 import polaris.administration.tables.GenericTableModel;
-import polaris.administration.tables.MainPanel;
 import polaris.frame.PolarisUI;
 
-import javax.swing.*;
 import javax.swing.event.TableModelListener;
 
 /**
@@ -19,6 +17,7 @@ public class CompaniesTableModel extends GenericTableModel
 {
     /**
      * Create the Companies Table Model constructor
+     *
      * @param crs - the column record set
      */
     public CompaniesTableModel(ColumnRecordSet crs)
@@ -28,6 +27,7 @@ public class CompaniesTableModel extends GenericTableModel
 
     /**
      * Sets whether the cell is editable
+     *
      * @param row - the row of the cell
      * @param col - the column of the cell
      * @return - true/false if editable
@@ -39,6 +39,7 @@ public class CompaniesTableModel extends GenericTableModel
 
     /**
      * Does nothing since the main table is not editable
+     *
      * @param v
      * @param row
      * @param col
@@ -49,6 +50,7 @@ public class CompaniesTableModel extends GenericTableModel
 
     /**
      * Gets the column count
+     *
      * @return - number of columns
      */
     public int getColumnCount()
@@ -58,6 +60,7 @@ public class CompaniesTableModel extends GenericTableModel
 
     /**
      * Gets the name of the column
+     *
      * @param column - the column
      * @return - the name of the column
      */
@@ -65,8 +68,10 @@ public class CompaniesTableModel extends GenericTableModel
     {
         return CompaniesTableColumnModel.names[column];
     }
+
     /**
      * Gets the class of the column
+     *
      * @param col - the column
      * @return - the class
      */
@@ -81,6 +86,7 @@ public class CompaniesTableModel extends GenericTableModel
             return getValueAt(0, col).getClass();
         }
     }
+
     /**
      * method for the table model listener
      *

@@ -159,7 +159,6 @@ public class BatchRoutesMaintenancePanel extends GenericTabPanel
 
         //--creates textfields.
         //these text fields are not editable therefore will not trigger textvaluechanged.
-        //todo: double check it doesnt trigger the textvalue changed when it is populated on updatePanel()
         updateUser = ComponentFactory.getUserTextField(false, Configuration.userDBName);
         userUpdateDate = ComponentFactory.getUserUpdateDateTextField(false, Configuration.userUpdateDateDBName);
 
@@ -260,7 +259,6 @@ public class BatchRoutesMaintenancePanel extends GenericTabPanel
         ComponentFactory.setTableModelClassName(this,tableModel.getClass().getName());
     }
 
-    // TODO: Remove this test method before release
     public void createTestForVisiTableComboBox()
     {
         try
@@ -744,7 +742,6 @@ public class BatchRoutesMaintenancePanel extends GenericTabPanel
         catch (Exception e)
         {
             //if it cannot load the data from database display an error message.
-            //todo:check if the is being displayed in the logfile only and not a dialog error message
             //must make this consistent.
             System.out.println(e.getMessage());
         }

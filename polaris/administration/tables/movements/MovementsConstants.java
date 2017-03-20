@@ -14,6 +14,9 @@ public class MovementsConstants {
     public static String recConCarrierWhereClause = "ID IN (SELECT REC_CON_CARRIER_ID FROM POLARIS.MOVEMENT_CONF ";
     public static String delLocationWhereClause = "ID IN (SELECT DEL_LOCATION_ID FROM POLARIS.MOVEMENT_CONF ";
     public static String delConCarrierWhereClause = "ID IN (SELECT DEL_CON_CARRIER_ID FROM POLARIS.MOVEMENT_CONF ";
+    public static String settledDBName              = "(SETTLED_FLAG";
+    public static String allocCreditDBName           = "(ALLOC_CREDIT_FLAG";
+    public static String crossoverDBName           = "(CROSSOVER_FLAG";
 
 
 

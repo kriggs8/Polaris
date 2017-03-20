@@ -8,7 +8,6 @@ import polaris.util.ValidatedTextField;
 import polaris.util.VisiComboBox;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -98,10 +97,16 @@ public class ContactsFilterPanel extends GenericFilterPanel
         //loop thru the panel's components
         //and build a where clause string.
         String where = whereClause.buildWhereClause(this);
+        String activeWhere = inactiveCombo.getSelectedId() == 0 ? " AND INACTIVE_INDICATOR_FLAG = 0 " : "";
+
         if (!where.isEmpty())
         {
             where = " WHERE \n" + where;
         }
+
+        // Close the main where and add the final INACTIVE_INDICATOR_FLAG
+        where += " ) " + activeWhere;
+
 
         ui.setBusyCursor();
         String action = e.getActionCommand();
@@ -118,75 +123,53 @@ public class ContactsFilterPanel extends GenericFilterPanel
                 companyCombo.hasFocus() && companyCombo.getSelectedItem().equals(SpecialItems.ALL))
             {
                 //use the default query to update the list for only system combo being populated
-                ComponentFactory.updateCombo(companyCombo, ContactsConstants.companyDBWhere0 + where + ")");
+                ComponentFactory.updateCombo(companyCombo, ContactsConstants.companyDBWhere0 + where);
             }
 
             if (action != systemGroupCombo.getName() && !systemGroupCombo.hasFocus() ||
                 systemGroupCombo.hasFocus() && systemGroupCombo.getSelectedItem().equals(SpecialItems.ALL))
             {
                 //use the default query to update the list for only system combo being populated
-                ComponentFactory.updateCombo(systemGroupCombo, ContactsConstants.systemGroupDBWhere0 + where + ")");
+                ComponentFactory.updateCombo(systemGroupCombo, ContactsConstants.systemGroupDBWhere0 + where);
             }
 
             if (action != schedSystemCombo.getName() && !schedSystemCombo.hasFocus() ||
                 schedSystemCombo.hasFocus() && schedSystemCombo.getSelectedItem().equals(SpecialItems.ALL))
             {
                 //use the default query to update the list for only system combo being populated
-                ComponentFactory.updateCombo(schedSystemCombo, ContactsConstants.schedSystemDBWhere0 + where + ")");
+                ComponentFactory.updateCombo(schedSystemCombo, ContactsConstants.schedSystemDBWhere0 + where);
             }
 
             if (action != locationCombo.getName() && !locationCombo.hasFocus() ||
                 locationCombo.hasFocus() && locationCombo.getSelectedItem().equals(SpecialItems.ALL))
             {
                 //use the default query to update the list for only system combo being populated
-                ComponentFactory.updateCombo(locationCombo, ContactsConstants.locationDBWhere0 + where + ")");
+                ComponentFactory.updateCombo(locationCombo, ContactsConstants.locationDBWhere0 + where);
             }
 
             if (action != conCarrierCombo.getName() && !conCarrierCombo.hasFocus() ||
                 conCarrierCombo.hasFocus() && conCarrierCombo.getSelectedItem().equals(SpecialItems.ALL))
             {
                 //use the default query to update the list for only system combo being populated
-                ComponentFactory.updateCombo(conCarrierCombo, ContactsConstants.conCarrierDBWhere0 + where + ")");
+                ComponentFactory.updateCombo(conCarrierCombo, ContactsConstants.conCarrierDBWhere0 + where);
             }
 
             if (action != shipperCombo.getName() && !shipperCombo.hasFocus() ||
                 shipperCombo.hasFocus() && shipperCombo.getSelectedItem().equals(SpecialItems.ALL))
             {
                 //use the default query to update the list for only system combo being populated
-                ComponentFactory.updateCombo(shipperCombo, ContactsConstants.shipperDBWhere0 + where + ")");
+                ComponentFactory.updateCombo(shipperCombo, ContactsConstants.shipperDBWhere0 + where);
             }
-            //prover distribution
+
             if (action != physicalMeterCombo.getName() && !physicalMeterCombo.hasFocus() ||
                 physicalMeterCombo.hasFocus() && physicalMeterCombo.getSelectedItem().equals(SpecialItems.ALL))
             {
                 //use the default query to update the list for only system combo being populated
-                ComponentFactory.updateCombo(physicalMeterCombo, ContactsConstants.physicalMeterDBWhere0 + where + ")");
+                ComponentFactory.updateCombo(physicalMeterCombo, ContactsConstants.physicalMeterDBWhere0 + where);
             }
         }
         ui.setDefaultCursor();
     }
-    /**
-     * method is triggered when components (comboboxes) in the filter panel has an action being done on it
-     * Actions on comboboxes will update dependent comboboxes model factory.
-     *
-     * @param e
-     */
-    public void actionPerformed(ActionEvent e)
-    {
-        //if the component does not have focus
-        //return out of this method.
-        //this occurs if action being done on the component is from another method
-        //not from user doing the action
-        Component component = (Component) e.getSource();
-        if (!component.hasFocus())
-        {
-            return;
-        }
-
-        //updates the combo boxes model factory.
-        updateCombo(e);
-    }
-
 
     @Override
     public String getOrderBy()

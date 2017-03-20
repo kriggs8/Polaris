@@ -16,7 +16,6 @@ import java.awt.event.ActionEvent;
  * For example; Changing the selection in the Scheduling System will filter the data being displayed
  * in all the combo box controls in this panel.
  * <p>
- * TODO: MORE COMMENTS
  *
  * @Author: Jean Wurster
  */
@@ -93,29 +92,7 @@ public class BatchRoutesFilterPanel extends GenericFilterPanel
 
 
 
-    /**
-     * method is triggered when components (comboboxes) in the filter panel has an action being done on it
-     * Actions on comboboxes will update dependent comboboxes model factory.
-     *
-     * @param e
-     */
-    public void actionPerformed(ActionEvent e)
-    {
-        //if the component does not have focus
-        //return out of this method.
-        //this occurs if action being done on the component is from another method
-        //not from user doing the action
-        Component component = (Component) e.getSource();
-        if (!component.hasFocus())
-        {
-            return;
-        }
 
-        //updates the combo boxes model factory.
-        updateCombo(e);
-
-
-    }
 
     /**
      * Updates the combo boxes model factory

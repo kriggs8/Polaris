@@ -8,19 +8,22 @@ import javax.swing.*;
 /**
  * Tabbed Panel Class for COMPANY_CONF
  * It instantiates the Filter and Maintenance Tabs
+ *
  * @Author TCI-Krista Riggs
  * Created 3/7/2017.
  */
 public class CompaniesTabbedPane extends GenericTabbedPane
 {
-    private CompaniesFilterPanel companiesFilterPanel;
+    private CompaniesFilterPanel      companiesFilterPanel;
     private CompaniesMaintenancePanel companiesMaintenancePanel;
 
     /**
      * Create Companies tabbed pane constructor
+     *
      * @throws Exception
      */
-    public CompaniesTabbedPane() throws Exception{
+    public CompaniesTabbedPane() throws Exception
+    {
         super();
 
         mainPanel = CompaniesPanel.mainPanel;
@@ -42,7 +45,7 @@ public class CompaniesTabbedPane extends GenericTabbedPane
         //tab1 Maintenance
         companiesMaintenancePanel = new CompaniesMaintenancePanel(mainPanel);
         addTab(PolarisUI.getMessage("CF_MAINTENANCE"), tabIcon, new JScrollPane(companiesMaintenancePanel),
-               PolarisUI.getMessage("CF_MAINTENANCE_PANEL", PolarisUI.getMessage("CONTACT")));
+               PolarisUI.getMessage("CF_MAINTENANCE_PANEL", PolarisUI.getMessage("COMPANY")));
 
         /**
          * ---END Module Specific Code

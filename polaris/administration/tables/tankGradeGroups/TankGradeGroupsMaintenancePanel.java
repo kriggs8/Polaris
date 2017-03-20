@@ -1,39 +1,23 @@
 package polaris.administration.tables.tankGradeGroups;
 
 import polaris.administration.tables.*;
-//import polaris.administration.tables.batchRoutes.BatchRoutesMaintenancePanel;
-import polaris.constants.Formats;
-import polaris.constants.SpecialItems;
-import polaris.db.ConnectionPool;
-import polaris.db.DBConn;
-import polaris.frame.PolarisSecurity;
-import polaris.frame.PolarisUI;
-import polaris.modelFactory.ConCarrierModelFactory;
-import polaris.modelFactory.LocationModelFactory;
-import polaris.ticket.shared.VisiMessage;
-import polaris.util.*;
-import polaris.util.tableCombobox.VisiTableComboBox;
+import polaris.util.ValidatedTextField;
+import polaris.util.VisiTextField;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DecimalFormat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 
-
-/**
- * Created 1/17/2017
- * Updated 1/20/2017 by TCI-KRiggs
- *
- * @Author TCI - Krista Riggs
- */
 
 /**
  * Creates the Maintenance Panel for a configuration screen.
  * This class implements ActionListener and TextListener
+ *
+ * @Author TCI - Krista Riggs
+ * Created 1/17/2017
+ * Updated 1/20/2017 by TCI-Krista Riggs - added comments
  */
 public class TankGradeGroupsMaintenancePanel extends GenericTabPanel implements ActionListener, TextListener
 {
@@ -51,8 +35,6 @@ public class TankGradeGroupsMaintenancePanel extends GenericTabPanel implements 
      * @param mainPanel
      * @throws Exception
      */
-
-    //main method
     public TankGradeGroupsMaintenancePanel(MainPanel mainPanel) throws Exception
     {
         super(mainPanel);
@@ -61,50 +43,70 @@ public class TankGradeGroupsMaintenancePanel extends GenericTabPanel implements 
     /**
      * The following non-implemented methods are declared
      * as they need to be overridden from the GenericTabPanel
+     * <p>
+     * no table to display on panel
+     *
+     * @return
      */
     @Override
     public String[] getColumnNames()
     {
-        //no table to display on panel
         return new String[0];
     }
 
+    /**
+     * no table to display on panel
+     *
+     * @return
+     */
     @Override
     public String[] getTableNames()
     {
-        //no table to display on panel
         return new String[0];
     }
 
+    /**
+     * no table to display on panel
+     *
+     * @return
+     */
     @Override
     public String[] getForeignKeyConstColNames()
     {
-        //no table to display on panel
         return new String[0];
     }
 
+    /**
+     * no table to display on panel
+     *
+     * @return
+     */
     @Override
     public String[][] getSelectColNames()
     {
-        //no table to display on panel
         return new String[0][];
     }
 
+    /**
+     * no table to display on panel
+     *
+     * @return
+     */
     @Override
     public String getOrderBy()
     {
-        //no table to display on panel
         return null;
     }
 
+    /**
+     * creates validatedtextfields
+     */
     @Override
     public void createPanel()
     {
-        //-- creates validatedtextfields
         /**use a validated text field instead of visitextfield, because a
-        * validateTextField turns green when modified and the visitextfield does not
-        * It also triggers the textvaluechanged only when it loses focus and value has changed.
-         *
+         * validateTextField turns green when modified and the visitextfield does not
+         * It also triggers the textvaluechanged only when it loses focus and value has changed.
          */
         description = ComponentFactory.getDescriptionTextField();
         alias = ComponentFactory.getAliasTextField();
@@ -131,17 +133,18 @@ public class TankGradeGroupsMaintenancePanel extends GenericTabPanel implements 
     /**
      * This method is triggered when the components in the maintenance panel
      * have an action being done on it
-     *
+     * <p>
      * This also sets the field to updated and the table row object to updated.
      *
-     * @param e
+     * @param e - the action performed
      */
     public void actionPerformed(ActionEvent e)
     {
 
-        //if the component does not have focus return out of this method.
-        //this occurs if the action being done on the component is from another method
-        //not from a user doing the action
+        /** if the component does not have focus return out of this method.
+         * this occurs if the action being done on the component is from another method
+         * not from a user doing the action
+         */
         Component component = (Component) e.getSource();
         if (!component.hasFocus())
         {
@@ -167,8 +170,6 @@ public class TankGradeGroupsMaintenancePanel extends GenericTabPanel implements 
         setDirty(true);
 
         ui.setDefaultCursor();
-
-
     }
 
     /**
@@ -178,7 +179,7 @@ public class TankGradeGroupsMaintenancePanel extends GenericTabPanel implements 
      * If this method is triggered, it sets the field to updated and the tablerow object
      * to updated.
      *
-     * @param e
+     * @param e - the text value changed
      */
     public void textValueChanged(TextEvent e)
     {
@@ -196,13 +197,11 @@ public class TankGradeGroupsMaintenancePanel extends GenericTabPanel implements 
         resultRS.setUpdated(e.getSource(), tableRow);
         //sets the dirty flag to panel to true.
         setDirty(true);
-
-
     }
 
     /**
-     * This method validates text entered into the text fields for the table in the tab,
-     * since there is no table in the Maintenance Tab it just validates that the columns exist
+     * This method validates text entered into the text fields for the table,
+     * this checks the constraints set for the components (ex. NAME: unique)
      */
     @Override
     protected void setValidators()
@@ -212,9 +211,8 @@ public class TankGradeGroupsMaintenancePanel extends GenericTabPanel implements 
         for (int i = 0; i < this.mainPanel.mainTableCrs.size(); i++)
         {
             Column column = this.mainPanel.mainTableCrs.elementAt(i);
-            if (column.columnName.equals("NAME") || column.columnName.equals("DESCRIPTION") ||
-                column.columnName.equals("ALIAS"))
-            {
+            if (column.columnName.equals("NAME") || column.columnName.equals("DESCRIPTION"))
+            {//No validator needed for Alias as it can be left null
                 column.setValidator(defaultValidator(column));
             }
         }

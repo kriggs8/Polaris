@@ -122,7 +122,7 @@ public class BatchRoutesGradesPanel extends GenericTabPanel
         tabTable = new GenericTable(new TableSorter(brGradesTableModel));
         tabTable.setMainPanel(mainPanel);
         tabTable.setColumnModel(brGradeTableColumnModel);
-        tabTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         tabTable.setFillsViewportHeight(true);
         tabTable.setIntercellSpacing(new Dimension(0, 0));
         //makes the Panel scrollable.

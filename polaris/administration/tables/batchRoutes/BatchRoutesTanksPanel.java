@@ -84,7 +84,7 @@ public class BatchRoutesTanksPanel extends GenericTabPanel
         tabTable = new GenericTable(new TableSorter(brTanksTableModel));
         tabTable.setMainPanel(mainPanel);
         tabTable.setColumnModel(brMetersTableColumnModel);
-        tabTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         tabTable.setFillsViewportHeight(true);
         tabTable.setIntercellSpacing(new Dimension(0, 0));
 

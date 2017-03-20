@@ -19,7 +19,6 @@ import java.sql.Statement;
  * class will be passed on to the MainTable class which creates the main panel (JPanel) of the main table (Jtable) and
  * tabbed Panel.
  * to display
- * TODO: MORE COMMENTS
  *
  * @Author: Jean Wurster
  */

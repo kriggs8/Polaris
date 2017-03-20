@@ -13,15 +13,16 @@ import polaris.util.tableCombobox.VisiTableComboBox;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.TextListener;
 import java.beans.PropertyChangeListener;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
  * Created by CE7 on 4/29/2016.
- * Updated by Waleed ElSaid on 01/10/2017, to add a new method getComboBox(), and updated all the Movements Filter
- * methods to use it
  */
 public class ComponentFactory
 {
@@ -333,48 +334,81 @@ public class ComponentFactory
         return textField;
     }
 
-    /*  Waleed ElSaid on 01/10/2017
-        Updated the method to call the generic getComboBox below
+    /**
+     * Get a getBigDecimalTextField instance (Number based Text Field).
+     *
+     * @param editable True = editable, false = not editable.
+     * @param dbName The table column name using in "(COLUMN_NAME" format.
+     * @param cols The number of columns for this text field
+     * @param scale The number of digits to the right of decimal point.
+     * @param unscaledValueDigitLimit The number of digits to the left of decimal point.
+     * @param roundingMode a BigDecimal.? value specifying the rounding mode for the control.
+     * @param formatString a Formats.? or custom format string for how the number should be displayed.
+     * @return
      */
+    public static BigDecimalTextField getBigDecimalTextField(boolean editable, String dbName, int cols, int scale, int unscaledValueDigitLimit, int roundingMode, String formatString)
+    {
+        // Instantiate the object
+        BigDecimalTextField textField = new BigDecimalTextField(cols);
+
+        // Set the Scale (right of .) and rounding mode
+        textField.setScale(scale, roundingMode);
+
+        // Set the unscaled value (left of .)
+        textField.setUnscaledValueDigitLimit(unscaledValueDigitLimit);
+
+        // Set the format string and parser
+        textField.setFormatter(new DecimalFormat(formatString));
+        textField.addParser(new DecimalFormat(formatString));
+
+        // Set whether the field is editable
+        textField.setEditable(editable);
+
+        // set the dbName
+        textField.setName(dbName);
+
+        // set whether to show feedback
+        textField.setShowFeedback(true);
+
+        return textField;
+    }
+
     public static VisiComboBox getSystemGroupComboBox(String where, String dbName, String specialValue)
-    {
-        return getComboBox(Configuration.systemGroupTableName, where, dbName, specialValue);
-    }
-
-    /*  Waleed ElSaid on 01/10/2017
-        Updated the method to call the generic getComboBox below
-     */
-    public static VisiComboBox getLineSpaceComboBox(String where, String dbName, String specialValue)
-    {
-        return getComboBox(Configuration.lineSpaceTableName, where, dbName, specialValue);
-    }
-
-    /*  Waleed ElSaid on 01/10/2017
-        Updated the method to call the generic getComboBox below
-     */
-    public static VisiComboBox getGradeSpecComboBox(String where, String dbName, String specialValue)
-    {
-        return getComboBox(Configuration.gradeSpecTableName, where, dbName, specialValue);
-    }
-
-    /*  Waleed ElSaid on 01/10/2017
-        Updated the method to call the generic getComboBox below
-     */
-    public static VisiComboBox getMovementComboBox(String where, String dbName, String specialValue)
-    {
-        return getComboBox(Configuration.movementTableName, where, dbName, specialValue);
-    }
-
-    /*  Waleed ElSaid on 01/10/2017
-        Added this method for all the new combo boxes, you just have to pass the DB table name, and db name
-        from the Configuration class, as well as the where clause which, in case of the movement module is kept in the MovementsConstants class,
-    */
-    public static VisiComboBox getComboBox(String tableName, String where, String dbName, String specialValue)
     {
         String whereClause = where.isEmpty() ? null : where + ")";
         String groupBy     = null;
         VisiComboBox comboBox = new VisiComboBox(
-                new DBIdNameFactory(tableName, "ID", displayValue, whereClause, groupBy), dbName,
+                new DBIdNameFactory(Configuration.systemGroupTableName, "ID", displayValue, whereClause, groupBy), dbName,
+                specialValue);
+        return comboBox;
+    }
+
+    public static VisiComboBox getLineSpaceComboBox(String where, String dbName, String specialValue)
+    {
+        String whereClause = where.isEmpty() ? null : where + ")";
+        String groupBy     = null;
+        VisiComboBox comboBox = new VisiComboBox(
+                new DBIdNameFactory(Configuration.lineSpaceTableName, "ID", displayValue, whereClause, groupBy), dbName,
+                specialValue);
+        return comboBox;
+    }
+
+    public static VisiComboBox getGradeSpecComboBox(String where, String dbName, String specialValue)
+    {
+        String whereClause = where.isEmpty() ? null : where + ")";
+        String groupBy     = null;
+        VisiComboBox comboBox = new VisiComboBox(
+                new DBIdNameFactory(Configuration.gradeSpecTableName, "ID", displayValue, whereClause, groupBy), dbName,
+                specialValue);
+        return comboBox;
+    }
+
+    public static VisiComboBox getMovementComboBox(String where, String dbName, String specialValue)
+    {
+        String whereClause = where.isEmpty() ? null : where + ")";
+        String groupBy     = null;
+        VisiComboBox comboBox = new VisiComboBox(
+                new DBIdNameFactory(Configuration.movementTableName, "ID", displayValue, whereClause, groupBy), dbName,
                 specialValue);
         return comboBox;
     }
@@ -467,7 +501,17 @@ public class ComponentFactory
                 //if this is the activeinactive combobox, dont reset.
                 if(!((VisiComboBox) pc[i]).getName().equals(Configuration.inactiveIndicatorDBName))
                 {
-                    updateCombo((SortedIdNameComboBox) pc[i], "");
+                    if (panel instanceof GenericFilterPanel)
+                    {
+                        //once it call this method, it needs to break out of the for loop so that the action performed
+                        //is not called multiple times.
+                        ((GenericFilterPanel) panel).updateCombo(new ActionEvent(pc[i], 0, ""));
+                        break;
+                    }
+                    else
+                        updateCombo((SortedIdNameComboBox) pc[i], "");
+
+
                 }
 
             }
@@ -647,6 +691,9 @@ public class ComponentFactory
 
             query += " ORDER BY F.DESCRIPTION, G.NAME ";
             factory = new GradeModelFactory(query);
+
+            // Joe Hunsaker - Fix a defect where grade_conf table name is lost from the factory
+            factory.setTableName(lookUpTable);
         } else
         {
             //gets the display value for the combobox

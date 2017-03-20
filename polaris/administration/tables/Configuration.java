@@ -2,8 +2,6 @@ package polaris.administration.tables;
 
 /**
  * Created by CE7 on 4/29/2016.
- * Update Date: 1/10/2017 by Waleed ElSaid - added some DB, and table names for the Movements Filter Tab comboBoxes
- * Update Date: 1/18/2017 by Waleed ElSaid - added some DB, and table names for the Movements Maintenance  Tab comboBoxes
  */
 public class Configuration
 {
@@ -48,9 +46,6 @@ public class Configuration
     public static String revenueAllocMethodDBName    = "(REVENUE_ALLOC_METHOD_ID";
     public static String bookInvLocationDBName       = "(BOOK_INV_LOCATION_ID";
     public static String genericNameDBName           = "(GENERIC_NAME";
-    public static String settledDBName              = "(SETTLED_FLAG";
-    public static String allocCreditDBName           = "(ALLOC_CREDIT_FLAG";
-    public static String crossoverDBName           = "(CROSSOVER_FLAG";
 
     public static String systemTableName         = "SYSTEM_CONF";
     public static String scheduleSystemTableName = "SCHED_SYSTEM_CONF";
